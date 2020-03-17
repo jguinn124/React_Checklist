@@ -9,7 +9,13 @@ class App extends Component {
 		newItem:"",
 		list: []
 	}
+  }
 
+  	updateInput(key, value){
+		this.setState({
+			[key]: value
+		})  
+	  }
 	addItem(){
 		//create item with unique id
 		const newItem={
@@ -21,13 +27,20 @@ class App extends Component {
 		const list = [...this.state.list];
 
 		//add new item to list
+		list.push(newItem);
+
+		//update state with new list and reset new item input
+		this.setState({
+			list,
+			newItem:""
+		})
 	}
 	render() {
 		return(
 			<div className="App">
 				<div>
 					Add an Item
-					<br>
+					<br/>
 					<input
 					type="text"
 					placeholder="Type item here"
