@@ -14,7 +14,7 @@ class App extends Component {
   	updateInput(key, value){
 		this.setState({
 			[key]: value
-		})  
+		});
 	  }
 	addItem(){
 		//create item with unique id
@@ -35,6 +35,15 @@ class App extends Component {
 			newItem:""
 		})
 	}
+
+	deleteItem(id){
+		//copy of current list of items
+		const list = [...this.state.list]
+
+		const updateList = list.filter(item => item.id !== id);
+
+		this.setState({list: updateList});
+	}
 	render() {
 		return(
 			<div className="App">
@@ -52,6 +61,22 @@ class App extends Component {
 					>
 						Add
 					</button>
+					<br/>
+					<ul>
+						{this.state.list.map(item => {
+							return(
+								<li key={item.id}>
+									{item.value}
+									<button 
+										onClick={() => this.deleteItem(item.id)}
+										>
+										Delete
+									</button>
+								</li>
+							)
+
+						} )}
+					</ul>
 				</div>
 
 			</div>
